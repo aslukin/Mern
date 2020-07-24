@@ -1,0 +1,4 @@
+{
+    "port": 5000, 
+    "mongoUri": "mongodb+srv://dbAdmin:dbMasterPassword@cluster0.7l0go.azure.mongodb.net/Mern?retryWrites=true&w=majority"
+}

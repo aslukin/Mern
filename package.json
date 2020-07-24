@@ -1,0 +1,37 @@
+{
+  "name": "mern",
+  "version": "1.0.0",
+  "description": "Mern complete project",
+  "main": "app.js",
+  "scripts": {
+    "start": "npm app.js",
+    "server": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aslukin/Mern.git"
+  },
+  "keywords": [
+    "js",
+    "mongoDB",
+    "express",
+    "react"
+  ],
+  "author": "Andrey Slukin <aslukin@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aslukin/Mern/issues"
+  },
+  "homepage": "https://github.com/aslukin/Mern#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.0",
+    "mongoose": "^5.9.25"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
