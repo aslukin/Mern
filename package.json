@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "npm app.js",
-    "server": "nodemon app.js"
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
+    "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.9.25"
   },
   "devDependencies": {
