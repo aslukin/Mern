@@ -1,34 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHttp } from '../hooks/http.hook';
+import { useMessage } from '../hooks/message.hook';
 //import { set } from 'mongoose';
 
 export const AuthPage = () => {
 
-    const {loading, error, request} = useHttp();
+    const {loading, request, error, clearError} = useHttp();
+    const message = useMessage();
 
-    const [form, state] = useState({
+    const [form, setForm] = useState({
         email: '',
         password: ''
     });
 
-
+    useEffect(() => {
+        message(error);
+        clearError();
+    }, [error, message, clearError]);
 
     const changeHandler = event => {
-        // setForm({...form, [event.target.name]: event.target.value});
+        setForm({...form, [event.target.name]: event.target.value});
 
     };
 
     const registerHandler = async () => {
         try {
-            console.log('form :>> ', form);
             const data = await request('/api/auth/register', 
                 'POST',
                 {...form});
-            console.log('data :>> ', data);
+            message(data.message);
         } catch (e) {
             
         }
     };
+
+
+    const loginHandler = async () => {
+        try {
+            const data = await request('/api/auth/login', 
+                'POST',
+                {...form});
+            message(data.message);
+        } catch (e) {
+            
+        }
+    };
+
 
     return (
         <div className="row">
@@ -44,7 +61,7 @@ export const AuthPage = () => {
                                 name="email"
                                 type="text"
                                 className="yellow-input" 
-                                // onChange={changeHandler}
+                                onChange={changeHandler}
                             />
                             <label htmlFor="email">Your email</label>
                         </div>
@@ -52,10 +69,10 @@ export const AuthPage = () => {
                             <input 
                                 placeholder="Password" 
                                 id="password" 
-                                name="email"
+                                name="password"
                                 type="password" 
                                 className="yellow-input" 
-                                // onChange={changeHandler}
+                                onChange={changeHandler}
                             />
                             <label htmlFor="password">Password</label>
                         </div>
@@ -66,6 +83,7 @@ export const AuthPage = () => {
                         <button 
                             className="btn yellow darken-4"
                             style={{ marginRight: 10 }}
+                            onClick={loginHandler}
                             disabled={loading}>
                             Login
                         </button>
