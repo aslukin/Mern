@@ -93,8 +93,5 @@ router.post('/login',
         }
     });
 
-// router.post("/", [], async (req, res) => {
-//     console.log('req :>> ', req);
-// })
 
 module.exports = router; 
