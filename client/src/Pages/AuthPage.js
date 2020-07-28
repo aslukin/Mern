@@ -1,13 +1,34 @@
 import React, { useState } from 'react';
+import { useHttp } from '../hooks/http.hook';
+//import { set } from 'mongoose';
 
 export const AuthPage = () => {
+
+    const {loading, error, request} = useHttp();
+
     const [form, state] = useState({
         email: '',
         password: ''
     });
 
-    
 
+
+    const changeHandler = event => {
+        // setForm({...form, [event.target.name]: event.target.value});
+
+    };
+
+    const registerHandler = async () => {
+        try {
+            console.log('form :>> ', form);
+            const data = await request('/api/auth/register', 
+                'POST',
+                {...form});
+            console.log('data :>> ', data);
+        } catch (e) {
+            
+        }
+    };
 
     return (
         <div className="row">
@@ -23,6 +44,7 @@ export const AuthPage = () => {
                                 name="email"
                                 type="text"
                                 className="yellow-input" 
+                                // onChange={changeHandler}
                             />
                             <label htmlFor="email">Your email</label>
                         </div>
@@ -33,6 +55,7 @@ export const AuthPage = () => {
                                 name="email"
                                 type="password" 
                                 className="yellow-input" 
+                                // onChange={changeHandler}
                             />
                             <label htmlFor="password">Password</label>
                         </div>
@@ -40,8 +63,18 @@ export const AuthPage = () => {
 
                     </div>
                     <div className="card-action">
-                        <button className="btn yellow darken-4" style={{ marginRight: 10 }}>Login</button>
-                        <button className="btn grey lighten-1 black-text">Register</button>
+                        <button 
+                            className="btn yellow darken-4"
+                            style={{ marginRight: 10 }}
+                            disabled={loading}>
+                            Login
+                        </button>
+                        <button 
+                            className="btn grey lighten-1 black-text"
+                            onClick = {registerHandler}
+                            disabled={loading}>
+                            Register
+                        </button>
                     </div>
                 </div>
 

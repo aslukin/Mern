@@ -8,6 +8,13 @@ const router = Router();
 
 
 // /api/auth
+
+// router.post('/register', [], async (req, res) => {
+//     // console.log('req :>> ', req);
+//     // console.log('res :>> ', res);
+//     res.status(201).json({ message: 'in the auth' });
+// })
+
 router.post('/register',
     [
         check('email', 'Incorrect e-mail').isEmail(),

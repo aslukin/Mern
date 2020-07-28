@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Mern complete project",
   "main": "app.js",
+
   "scripts": {
     "start": "npm app.js",
     "server": "nodemon app.js",
