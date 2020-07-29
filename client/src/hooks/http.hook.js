@@ -13,10 +13,7 @@ export const useHttp = () => {
                 body = JSON.stringify(body);
                 headers['Content-type'] = 'application/json';
             }
-            console.log('body :>> ', body);
-            console.log('url :>> ', url);
-            console.log('method :>> ', method);
-            console.log('headers :>> ', headers);
+
             const response = await fetch( url, {method, body, headers});
             const data = await response.json();
             if (!response.ok) {
