@@ -8,10 +8,10 @@ module.exports = (req, res, next) => {
 
     try {
         
-        const tocken = req.headers.authorisation.split(' ')[1];
+        const tocken = req.headers.authorization.split(' ')[1];
 
         if (!tocken) {
-            return res.status(401).json({ message: 'No authorisation'});
+            return res.status(401).json({ message: 'No authorisation 1'});
         }
 
         const decoded = jwt.verify(tocken, config.get('jwtsecret'))
@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
         next();
 
     } catch (e) {
-        return res.status(401).json({ message: 'No authorisation'});
+        return res.status(401).json({ message: 'No authorisation 2'});
 
     }
 };

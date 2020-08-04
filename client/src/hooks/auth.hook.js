@@ -5,6 +5,8 @@ const storageName = 'userData';
 export const useAuth = () => {
     const [tocken, setTocken] = useState(null);
     const [userId, setUserId] = useState(null);
+    const [ready, setReady] = useState(false);
+
 
     const login = useCallback((jwtTocken, id) => {
         setTocken(jwtTocken);

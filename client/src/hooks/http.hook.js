@@ -14,7 +14,14 @@ export const useHttp = () => {
                 headers['Content-type'] = 'application/json';
             }
 
+            console.log('url :>> ', url);    
+            console.log('headers :>> ', headers);
+            console.log('body :>> ', body);
+
             const response = await fetch( url, {method, body, headers});
+            
+            console.log('response :>> ', response);
+            
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.message || 'Something is worng');

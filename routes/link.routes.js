@@ -3,17 +3,22 @@ const Link = require('./../models/link');
 const auth = require('../middleware/auth.middleware');
 const config = require('config');
 const shortid = require('shortid');
-// const link = require('./../models/link');
 const router = Router();
 
-router.post('/generate', auth, async (req, res) => {
+
+// router.post('/generate', auth, async (req, res) => {
+router.post('/generate',  async (req, res) => {
     try {
+       
         const baseURL = config.get("baseURL");
-        const { from } = req.body;
+        console.log('req.body :>> ', req.body);
+        const { from, userId } = req.body;
 
         const code = shortid.generate();
 
         const existing = await Link.findOne({ from });
+
+
 
         if (existing) {
             return res.json({ link: existing });
@@ -21,9 +26,15 @@ router.post('/generate', auth, async (req, res) => {
 
         const to = baseURL + '/t/' + code;
 
+        console.log('userId :>> ', userId);
         const link = new Link({
-            code, to, from, owner: req.user.userId
+            code: code, 
+            from: from, 
+            to: to,
+            owner: userId
         })
+
+console.log('link :>> ', link);
 
         await link.save();
 
