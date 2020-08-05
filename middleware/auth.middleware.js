@@ -11,16 +11,16 @@ module.exports = (req, res, next) => {
         const tocken = req.headers.authorization.split(' ')[1];
 
         if (!tocken) {
-            return res.status(401).json({ message: 'No authorisation 1'});
+            return res.status(401).json({ message: 'No authorisation'});
         }
 
-        const decoded = jwt.verify(tocken, config.get('jwtsecret'))
+        const decoded = jwt.verify(tocken, config.get('jwtSecret'))
 
         req.user = decoded;
         next();
 
     } catch (e) {
-        return res.status(401).json({ message: 'No authorisation 2'});
+        return res.status(401).json({ message: 'No authorization'});
 
     }
 };

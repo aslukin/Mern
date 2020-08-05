@@ -7,16 +7,15 @@ const router = Router();
 
 
 // router.post('/generate', auth, async (req, res) => {
-router.post('/generate',  async (req, res) => {
+router.post('/generate', auth, async (req, res) => {
     try {
        
         const baseURL = config.get("baseURL");
-        console.log('req.body :>> ', req.body);
         const { from, userId } = req.body;
 
         const code = shortid.generate();
 
-        const existing = await Link.findOne({ from });
+        const existing = await Link.findOne({ from, owner: userId });
 
 
 
@@ -26,7 +25,6 @@ router.post('/generate',  async (req, res) => {
 
         const to = baseURL + '/t/' + code;
 
-        console.log('userId :>> ', userId);
         const link = new Link({
             code: code, 
             from: from, 
@@ -34,7 +32,6 @@ router.post('/generate',  async (req, res) => {
             owner: userId
         })
 
-console.log('link :>> ', link);
 
         await link.save();
 
@@ -61,6 +58,8 @@ router.get('/', auth, async (req, res) => {
 
 router.get('/:id', auth, async (req, res) => {
     try {
+        
+        console.log('router.get :>>' );
         const link = await Link.findById(req.param.id);
         res.json(link);
 

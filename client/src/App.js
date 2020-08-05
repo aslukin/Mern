@@ -7,14 +7,21 @@ import 'materialize-css';
 import './App.css';
 import { AuthContext } from './context/auth.context';
 import { Navbar } from './components/Navbar';
+import { Loader } from './components/Loader';
 
 
 function App() {
 
-  const { tocken, login, logout, userId } = useAuth();
+  const { tocken, login, logout, userId, ready } = useAuth();
   const isAuthenticated = !!tocken;
 
   const routes = useRoutes(isAuthenticated);
+
+  if (!ready) {
+    return(
+      <Loader />
+    );
+  }
 
   return (
     <AuthContext.Provider value = {{

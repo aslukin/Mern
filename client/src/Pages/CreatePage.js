@@ -27,7 +27,6 @@ export const CreatePage = () => {
                 {
                   Authorization: `Bearer ${auth.tocken}`
                 }); 
-                console.log('data :>> ', data);
                 history.push(`/detail/${data.link._id}`)
             } catch (error) {  }
         }
