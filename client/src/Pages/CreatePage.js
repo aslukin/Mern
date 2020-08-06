@@ -19,7 +19,7 @@ export const CreatePage = () => {
     const pressHandler = async (event) => {
         if (event.key === 'Enter') {
             try {
-                const data = await request('api/link/generate', 'POST', 
+                const data = await request('/api/link/generate', 'POST', 
                 {
                     from: link,
                     userId: auth.userId

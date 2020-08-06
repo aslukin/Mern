@@ -17,8 +17,6 @@ router.post('/generate', auth, async (req, res) => {
 
         const existing = await Link.findOne({ from, owner: userId });
 
-
-
         if (existing) {
             return res.json({ link: existing });
         }
@@ -47,7 +45,7 @@ router.post('/generate', auth, async (req, res) => {
 
 router.get('/', auth, async (req, res) => {
     try {
-        const links = await Link.find({ owner: req.user.userId });
+        const links = await Link.find({ owner: req.user.userID });
         res.json(links);
     } catch (e) {
         res.status(500).json({
@@ -56,20 +54,18 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-router.get('/:id', auth, async (req, res) => {
-    try {
+    router.get('/:id', auth, async (req, res) => {
+        try {
         
-        console.log('router.get :>>' );
-        const link = await Link.findById(req.param.id);
+        const link = await Link.findById(req.params.id);
         res.json(link);
 
     } catch (e) {
         res.status(500).json({
-            message: 'Server error'
+            message: 'Server error in getitem'
 
         });
     }
-
 });
 
 

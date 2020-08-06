@@ -20,7 +20,7 @@ export const useHttp = () => {
             console.log('headers :>> ', headers);
             const response = await fetch( url, {method, body, headers});
             
-        console.log('response :>> ', response);            
+        // console.log('response :>> ', response);            
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.message || 'Something is worng');
@@ -31,6 +31,7 @@ export const useHttp = () => {
             return data;
 
         } catch (e) {
+            console.log('error in get :>> ', e);
             setLoading(false);
             setError(e.message);
             throw e;
